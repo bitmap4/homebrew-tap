@@ -7,6 +7,7 @@ class Ds4color < Formula
   sha256 "4c9cb91c8e13f2d868cd8fe91fc211b1ec49a783be63030a4ad9211c31e0aae3"
   license "MIT"
 
+  depends_on "pkg-config" => :build
   depends_on "hidapi"
   depends_on "python@3.13"
 
@@ -16,6 +17,7 @@ class Ds4color < Formula
   end
 
   def install
+    ENV.prepend_path "PKG_CONFIG_PATH", Formula["hidapi"].opt_lib/"pkgconfig"
     virtualenv_install_with_resources
   end
 
